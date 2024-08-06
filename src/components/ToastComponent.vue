@@ -37,7 +37,7 @@ export default {
       if (props.hasError) {
         toast.error(props.message, configToast)
       } else {
-        toast(props.message, configToast)
+        toast.success(props.message, configToast)
       }
     }
     return {

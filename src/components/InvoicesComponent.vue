@@ -10,8 +10,8 @@
         <div class="col-md-1">Action</div>
       </div>
     </div>
-    <div class="alert bg-table-row" role="alert">
-      <div class="row" v-for="(invoice, index) in invoiceList" :key="index">
+    <div class="alert bg-table-row" v-for="(invoice, index) in invoiceList" :key="index" role="alert">
+      <div class="row">
         <div class="col-md-2">{{ index + 1 }}</div>
         <div class="col-md-2">{{ invoice.invoice_date }}</div>
         <div class="col-md-3">{{ invoice.name }}</div>

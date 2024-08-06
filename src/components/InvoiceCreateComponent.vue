@@ -181,7 +181,12 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-outline-primary" @click="submitInvoice()">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              @click="submitInvoice()"
+              :disabled="loading"
+            >
               {{ isUpdate ? 'Update' : 'Generate' }}
             </button>
           </div>
@@ -242,7 +247,7 @@ export default {
       if (invoiceId.value) await getInvoiceDetail()
     }
     expose({ showModal })
-    onMounted(async () => {
+    onMounted(async () => {     
       const invoiceModalEl = document.getElementById('staticBackdrop')
       invoiceModalInstance = new Modal(invoiceModalEl)
     })
@@ -296,7 +301,11 @@ export default {
       } else {
         clientDetails.value.id = uuid.v4()
         clientDetails.value.itemList = itemList.value
-        await handleAPIRequest('Home', 'Home/SUBMIT_INVOICE_DETAILS', clientDetails.value)
+        if (!isUpdate.value) {
+          await handleAPIRequest('Home', 'Home/SUBMIT_INVOICE_DETAILS', clientDetails.value)
+        } else {
+          await handleAPIRequest('Home', 'Home/UPDATE_INVOICE_DETAILS', clientDetails.value)
+        }
       }
     }
     const resetInvoice = () => {

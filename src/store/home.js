@@ -45,6 +45,16 @@ const actions = {
         } catch (error) {
             console.log(error);
         }
+    },
+    async UPDATE_INVOICE_DETAILS({ commit }, params) {
+        const { setToFirbaseStore } = useFirebaseDataStore();
+        commit('RESET_RESPONSE_FLAG')
+        try {
+            await setToFirbaseStore('invoices', params);
+            commit('SET_SUCCESS', "Invoice saved successfully")
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
